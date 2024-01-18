@@ -4,6 +4,7 @@ url: "https://github.com/Donkie/Spoolman"
 slug: "spoolman"
 init: false
 arch:
+  - aarch64
   - amd64
   - arm64
   - armv7
