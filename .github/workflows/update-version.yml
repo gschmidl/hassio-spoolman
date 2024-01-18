@@ -1,0 +1,42 @@
+name: Update version
+run-name: Update latest version names of the docker images
+on:
+  schedule:
+    - cron: '30 */4 * * *'
+  workflow_dispatch:
+
+jobs:
+  logLatestRelease:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: octokit/request-action@v2.x
+        id: get_latest_release
+        with:
+          route: GET /users/Donkie/packages/container/Spoolman/versions?per_page=100
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+
+      - run: "echo '${{ steps.get_latest_release.outputs.data }}' > /tmp/data.json"
+
+      - id: update_version
+        run: |
+          STABLE_VERSION=$(jq -r 'map(select(.metadata.container.tags | any(. == "latest"))) | .[0].metadata.container.tags | map(select(. != "latest")) | .[0]' /tmp/data.json 2>/dev/null || true)
+
+          echo Latest Stable: $STABLE_VERSION
+
+          if [ -n "$STABLE_VERSION" ]
+          then
+            sed -i 's|^version: .*|version: '"$STABLE_VERSION"'|' spoolman/config.yaml
+          fi
+
+          echo "message=Update version numbers to: '$STABLE_VERSION'" >> "$GITHUB_OUTPUT"
+
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "${{ steps.update_version.outputs.message }}"

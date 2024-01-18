@@ -1,0 +1,16 @@
+name: "Spoolman"
+description: "Run the latest stable version of Spoolman."
+url: "https://github.com/Donkie/Spoolman"
+slug: "spoolman"
+init: false
+arch:
+  - amd64
+  - arm64
+  - armv7
+startup: application
+webui: "[PROTO:option_name]://[HOST]:[PORT:7912]"
+boot: auto
+ports:
+  7912/tcp: 7912
+image: ghcr.io/donkie/spoolman
+version: 0.15
