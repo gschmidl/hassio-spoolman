@@ -19,7 +19,6 @@ https://github.com/gschmidl/hassio-spoolman
 You'll need to execute the following in a HA console to create the storage directory. Sorry, I don't know how to do it automatically and all inquiries remained unanswered.
 
 ```
-cd /config/addons_config
-mkdir spoolman
-chown 1000:1000 spoolman
+mkdir -p /config/addons_config/spoolman
+chown 1000:1000 /config/addons_config/spoolman
 ```
