@@ -76,4 +76,4 @@ boot: auto
 ports:
   8000/tcp: 8000
 image: ghcr.io/donkie/spoolman
-version: 0.19
+version: 0.19.2
