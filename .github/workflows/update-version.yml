@@ -37,6 +37,6 @@ jobs:
 
           echo "message=Update version numbers to: '$STABLE_VERSION'" >> "$GITHUB_OUTPUT"
 
-      - uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: "${{ steps.update_version.outputs.message }}"
+      #- uses: stefanzweifel/git-auto-commit-action@v4
+      #  with:
+      #    commit_message: "${{ steps.update_version.outputs.message }}"
