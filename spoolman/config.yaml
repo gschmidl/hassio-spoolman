@@ -43,7 +43,7 @@ startup: application
 udev: true
 webui: "[PROTO:option_name]://[HOST]:[PORT:8000]"
 environment:
-  SPOOLMAN_DIR_DATA: "/config/addons_config/spoolman"
+  SPOOLMAN_DIR_DATA: "/config/addon_configs/spoolman"
 map:
   - config:rw  
 boot: auto
